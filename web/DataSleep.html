@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sleep Duration and Status</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-7ymO4nGrkm372HoSbq1OY2DP4pEZnMiA+E0F3zPr+JQQtQ82gQ1HPY3QIVtztVua" crossorigin="anonymous"></script>
+  
+</head>
+<body>
+  <div class="container my-5">
+    <canvas id="sleepChart"></canvas>
+  </div>
+  <button type="button" class="btn btn-primary btn-lg" onclick="return0()">menu</button>
+  <button type="button" class="btn btn-secondary btn-lg" onclick="">return</button>
+  <script>
+	  function return0(){
+		  window.open("http://WWW.BAIDU.COM");
+	  } 
+  </script>
+
+  <script>
+    // 数据示例
+    const sleepData = [
+      { time: 'light', duration: 6, status: 'Light' },
+      { time: 'sleep', duration: 2, status: 'Deep' },
+      { time: 'deep', duration: 1, status: 'Awake' },
+      // 添加更多数据...
+    ];
+
+    // 创建柱状图
+    const ctx = document.getElementById('sleepChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: sleepData.map(data => data.time),
+        datasets: [
+          {
+            label: 'Duration (hours)',
+            data: sleepData.map(data => data.duration),
+            backgroundColor: sleepData.map(data => {
+              if (data.status === 'Light') {
+                return 'rgba(54, 162, 235, 0.8)';
+              } else if (data.status === 'Deep') {
+                return 'rgba(75, 119, 190, 0.8)';
+              } else if (data.status === 'Awake') {
+                return 'rgba(0, 123, 255, 0.8)';
+              }
+            }),
+          },
+        ],
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+            max: 10, // 根据数据情况调整最大值
+          },
+        },
+      },
+    });
+  </script>
+</body>
+</html>
